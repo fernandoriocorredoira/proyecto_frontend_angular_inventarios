@@ -1,5 +1,6 @@
 import { Component, inject, signal } from '@angular/core';
 import { AuthService } from '../../core/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-perfil',
@@ -10,6 +11,7 @@ import { AuthService } from '../../core/services/auth.service';
 export class Perfil {
   authService = inject(AuthService);
   perfil = signal<any>({});
+  router = inject(Router)
 
   constructor(){
     this.funObtenerPerfil()
@@ -25,5 +27,10 @@ export class Perfil {
       }
     }
     )
+  }
+
+  funSalir(){
+    localStorage.removeItem("access_token");
+    this.router.navigate(["/auth/login"]);
   }
 }

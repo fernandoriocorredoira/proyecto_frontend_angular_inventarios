@@ -1,0 +1,46 @@
+<h1>Lista de Usuarios</h1>
+
+
+
+<div>
+    NOMBRE: {{ userForm.value.name }}
+    <br>
+    CORREO: {{ userForm.value.email }}
+    <br>
+    PASSWORD: {{ userForm.value.password }}
+</div>
+<form [formGroup]="userForm">
+    <label for="">INGRESE NOMBRE</label>
+    <input type="text" formControlName="name">
+    <br>
+    <label for="">INGRESE SU CORREO</label>
+    <input type="email" formControlName="email">
+    <br>
+    <label for="">INGRESE SU CONTRASEÑA</label>
+    <input type="password" formControlName="password">
+    <br>
+    <button type="button" (click)="funGuardarUsuario()">GUARDAR CAMBIOS</button>
+</form>
+
+<table border="1">
+    <thead>
+        <tr>
+            <th>NOMBRE</th>
+            <th>CORREO</th>
+            <th>ESTADO</th>
+            <th>ACCION</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for(user of usuarios(); track $index){
+        <tr>
+            <td>{{user.name}}</td>
+            <td>{{user.email}}</td>
+            <td>{{user.status?'ACTIVO':'INACTIVO'}}</td>
+            <td>
+                <button (click)="funEditarUsuario(user)">EDITAR</button>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

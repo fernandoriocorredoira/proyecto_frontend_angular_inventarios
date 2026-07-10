@@ -2,4 +2,6 @@
 @if (perfil().id) {
     <h1>NOMBRE: {{perfil().name}}</h1>
     <h1>CORREO: {{perfil().email}}</h1>
+
+    <button (click)="funSalir()">SALIR</button>
 }

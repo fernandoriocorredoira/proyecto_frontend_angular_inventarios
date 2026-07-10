@@ -4,12 +4,12 @@ import { HttpClient } from '@angular/common/http';
 
 @Service()
 export class AuthService {
-    urlBase = environment.servidor_laravel;
+    urlBase = environment.servidor2;
 
     http = inject(HttpClient);
 
     funLoginLaravel(credenciales: any){
-        return this.http.post(`${this.urlBase}/api/v1/auth/login`, credenciales);
+        return this.http.post(`${this.urlBase}/auth/v1/auth/login`, credenciales);
     }
     
     funRegister(){

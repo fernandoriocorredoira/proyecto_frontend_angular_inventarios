@@ -6,6 +6,7 @@ import { Servicios } from './web/servicios/servicios';
 import { AppLayout } from './layout/app-layout/app-layout';
 import { Dashboard } from './admin/dashboard/dashboard';
 import { Perfil } from './admin/perfil/perfil';
+import { Users } from './admin/users/users';
 
 export const routes: Routes = [
     {
@@ -24,6 +25,7 @@ export const routes: Routes = [
         children: [
             { path: '', component: Dashboard },
             { path: 'perfil', component: Perfil },
+            { path: 'usuarios', component: Users },
         ]
     },
 ];
