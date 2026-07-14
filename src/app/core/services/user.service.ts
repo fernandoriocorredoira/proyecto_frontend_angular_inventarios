@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 
 @Service()
 export class UserService {
-    urlBase = environment.servidor2;
+    urlBase = environment.servidor1;
 
     http = inject(HttpClient);
 

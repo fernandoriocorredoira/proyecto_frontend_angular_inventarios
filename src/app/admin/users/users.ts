@@ -13,6 +13,7 @@ export class Users implements OnInit{
   usuarios = signal<any>([]);
   userService = inject(UserService);
   user_id = signal<any>(-1)
+  errors = signal<any>({})
 
 
   userForm = new FormGroup({
@@ -37,11 +38,16 @@ export class Users implements OnInit{
   }
 
   funGuardarUsuario(){
-    if(this.user_id()){
+    if(this.user_id() > 0){
       this.userService.funModificar(this.user_id(), this.userForm.value).subscribe({
         next: (res) => {
           this.funObtenerUsuarios();
           this.user_id.set(-1);
+          this.userForm.reset();
+        },
+        error: (error) => {
+          console.log(error)
+
         }
       })
 
@@ -49,6 +55,12 @@ export class Users implements OnInit{
       this.userService.funGuardar(this.userForm.value).subscribe({
         next: (res) => {
           this.funObtenerUsuarios();
+          this.userForm.reset();
+        },
+        error: (error) => {
+          console.log(error)
+          this.errors.set(error.error)
+
         }
       })
 

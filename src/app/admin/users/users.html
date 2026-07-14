@@ -9,6 +9,7 @@
     <br>
     PASSWORD: {{ userForm.value.password }}
 </div>
+{{errors().message}}
 <form [formGroup]="userForm">
     <label for="">INGRESE NOMBRE</label>
     <input type="text" formControlName="name">
@@ -19,7 +20,7 @@
     <label for="">INGRESE SU CONTRASEÑA</label>
     <input type="password" formControlName="password">
     <br>
-    <button type="button" (click)="funGuardarUsuario()">GUARDAR CAMBIOS</button>
+    <button type="button" (click)="funGuardarUsuario()" [disabled]="!userForm.valid">GUARDAR CAMBIOS</button>
 </form>
 
 <table border="1">
@@ -38,7 +39,7 @@
             <td>{{user.email}}</td>
             <td>{{user.status?'ACTIVO':'INACTIVO'}}</td>
             <td>
-                <button (click)="funEditarUsuario(user)">EDITAR</button>
+                <button (click)="funEditarUsuario(user)" >EDITAR</button>
             </td>
         </tr>
         }
