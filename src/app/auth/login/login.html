@@ -8,8 +8,9 @@
     <input type="password" formControlName="password">
     <br>
     
-        <button (click)="funIngresarConLaravel()" [disabled]="!loginForm.valid || loading()">INGRESAR AL SISTEMA</button>
-  
+        <button matFab extended (click)="funIngresarConLaravel()" [disabled]="!loginForm.valid || loading()">INGRESAR AL SISTEMA</button>
+
+
     @if (loading()) {
         <h1>Procesando...</h1>
     }

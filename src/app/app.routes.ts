@@ -7,6 +7,8 @@ import { AppLayout } from './layout/app-layout/app-layout';
 import { Dashboard } from './admin/dashboard/dashboard';
 import { Perfil } from './admin/perfil/perfil';
 import { Users } from './admin/users/users';
+import { NavigationComponent } from './layout/navigation/navigation.component';
+import { DashComponent } from './admin/dash/dash.component';
 
 export const routes: Routes = [
     {
@@ -21,9 +23,9 @@ export const routes: Routes = [
     },
     {
         path: 'admin',
-        component: AppLayout,
+        component: NavigationComponent,
         children: [
-            { path: '', component: Dashboard },
+            { path: '', component: DashComponent },
             { path: 'perfil', component: Perfil },
             { path: 'usuarios', component: Users },
         ]

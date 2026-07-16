@@ -3,6 +3,8 @@ import { AuthService } from '../../core/services/auth.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
+import {MatButtonModule} from '@angular/material/button';
+
 @Component({
   selector: 'app-login',
   standalone: false,
