@@ -1,4 +1,78 @@
-<h1>Lista de Usuarios</h1>
+<mat-card class="custom-card mat-elevation-z3">
+  
+  <!-- Cabecera de la Tarjeta -->
+  <mat-card-header class="card-header">
+    <div class="header-title-group">
+      <mat-icon class="header-icon">people</mat-icon>
+      <mat-card-title>Lista de Usuarios</mat-card-title>
+    </div>
+    <span class="spacer"></span>
+    <button mat-flat-button color="primary" class="add-btn">
+      <mat-icon>add</mat-icon>
+      Nuevo Usuario
+    </button>
+  </mat-card-header>
+
+  <mat-card-content class="card-content">
+    
+    <!-- Barra de Herramientas / Filtros -->
+    <div class="table-actions">
+      <mat-form-field appearance="outline" class="search-field">
+        <mat-label>Buscar usuarios</mat-label>
+        <input matInput placeholder="Ej. Juan Pérez">
+        <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
+    </div>
+
+    <!-- Contenedor con scroll horizontal por si la pantalla es pequeña -->
+    <div class="table-container">
+      <mat-table #table [dataSource]="usuarios()" class="custom-table">
+        
+        <!-- Nombre Column -->
+        <ng-container matColumnDef="name">
+          <mat-header-cell *matHeaderCellDef> Nombre </mat-header-cell>
+          <mat-cell *matCellDef="let element" class="font-medium"> {{element.name}} </mat-cell>
+        </ng-container>
+      
+        <!-- Correo Column -->
+        <ng-container matColumnDef="email">
+          <mat-header-cell *matHeaderCellDef> Correo </mat-header-cell>
+          <mat-cell *matCellDef="let element" class="text-muted"> {{element.email}} </mat-cell>
+        </ng-container>
+
+        <!-- Roles Column -->
+        <ng-container matColumnDef="roles">
+          <mat-header-cell *matHeaderCellDef> Roles </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <mat-chip-set>
+              @for (rol of element.roles; track $index) {
+                <mat-chip class="role-chip">{{rol.name}}</mat-chip>    
+              }
+            </mat-chip-set>
+          </mat-cell>
+        </ng-container>
+
+        <!-- Acciones Column -->
+        <ng-container matColumnDef="acciones">
+          <mat-header-cell *matHeaderCellDef class="action-header">Acciones</mat-header-cell>
+          <mat-cell *matCellDef="let user" class="action-cell">
+            <button mat-icon-button color="primary" matTooltip="Editar usuario">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button color="warn" matTooltip="Eliminar usuario">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </mat-cell>
+        </ng-container>
+      
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;" class="table-row"></mat-row>
+      </mat-table>
+    </div>
+
+  </mat-card-content>
+</mat-card>
+
 
 
 
@@ -23,7 +97,7 @@
     <button type="button" (click)="funGuardarUsuario()" [disabled]="!userForm.valid">GUARDAR CAMBIOS</button>
 </form>
 
-<table border="1">
+<table border="1" >
     <thead>
         <tr>
             <th>NOMBRE</th>
@@ -45,3 +119,5 @@
         }
     </tbody>
 </table>
+
+

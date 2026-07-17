@@ -1,7 +1,59 @@
-<h1>Mi Perfil</h1>
-@if (perfil().id) {
-    <h1>NOMBRE: {{perfil().name}}</h1>
-    <h1>CORREO: {{perfil().email}}</h1>
+<div class="profile-container">
+  <mat-card class="profile-card mat-elevation-z3">
+    
+    <!-- Encabezado del Perfil -->
+    <mat-card-header class="profile-header">
+      <div class="avatar-container">
+        <!-- Avatar generado con las iniciales o un icono por defecto -->
+        <div class="profile-avatar">
+          {{ perfil().name ? perfil().name.charAt(0).toUpperCase() : 'U' }}
+        </div>
+      </div>
+      <mat-card-title class="profile-title">Mi Perfil</mat-card-title>
+      <mat-card-subtitle class="profile-subtitle">Información de la cuenta</mat-card-subtitle>
+    </mat-card-header>
 
-    <button (click)="funSalir()">SALIR</button>
-}
+    <mat-card-content class="profile-content">
+      @if (perfil().id) {
+        
+        <!-- Detalle: Nombre -->
+        <div class="info-row">
+          <mat-icon class="info-icon">person</mat-icon>
+          <div class="info-text">
+            <span class="info-label">Nombre completo</span>
+            <span class="info-value">{{ perfil().name }}</span>
+          </div>
+        </div>
+
+        <mat-divider></mat-divider>
+
+        <!-- Detalle: Correo -->
+        <div class="info-row">
+          <mat-icon class="info-icon">email</mat-icon>
+          <div class="info-text">
+            <span class="info-label">Correo electrónico</span>
+            <span class="info-value">{{ perfil().email }}</span>
+          </div>
+        </div>
+
+        <mat-divider></mat-divider>
+
+        <!-- Acciones del Perfil -->
+        <div class="profile-actions">
+          <button mat-stroked-button color="warn" class="logout-btn" (click)="funSalir()">
+            <mat-icon>logout</mat-icon>
+            Cerrar Sesión
+          </button>
+        </div>
+
+      } @else {
+        <!-- Estado de carga o sin sesión activa -->
+        <div class="no-profile">
+          <mat-spinner diameter="40"></mat-spinner>
+          <p>Cargando datos del perfil...</p>
+        </div>
+      }
+    </mat-card-content>
+
+  </mat-card>
+</div>

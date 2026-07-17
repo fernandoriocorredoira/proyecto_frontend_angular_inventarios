@@ -1,10 +1,15 @@
 import { Component, inject, signal } from '@angular/core';
 import { AuthService } from '../../core/services/auth.service';
 import { Router } from '@angular/router';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatIconModule } from '@angular/material/icon';
+import { MatCardModule } from '@angular/material/card';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-perfil',
-  imports: [],
+  imports: [MatProgressSpinnerModule, MatIconModule, MatCardModule, MatDividerModule, MatButtonModule],
   templateUrl: './perfil.html',
   styleUrl: './perfil.scss',
 })

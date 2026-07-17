@@ -1,10 +1,36 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { UserService } from '../../core/services/user.service';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {MatTableModule} from '@angular/material/table';
+import {CdkDragDrop, CdkDropList, CdkDrag, moveItemInArray} from '@angular/cdk/drag-drop';
+import { MatIconModule } from '@angular/material/icon';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatChipsModule } from '@angular/material/chips';
+
+export interface PeriodicElement {
+  name: string;
+  position: number;
+  weight: number;
+  symbol: string;
+  quantity: number;
+}
 
 @Component({
   selector: 'app-users',
-  imports: [ReactiveFormsModule],
+  imports: [
+    ReactiveFormsModule,
+    MatTableModule,
+    MatTableModule,
+    MatIconModule,
+    MatCardModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatChipsModule
+  ],
   templateUrl: './users.html',
   styleUrl: './users.scss',
 })
@@ -14,6 +40,9 @@ export class Users implements OnInit{
   userService = inject(UserService);
   user_id = signal<any>(-1)
   errors = signal<any>({})
+
+  displayedColumns: string[] = ['name', 'email', 'roles', 'acciones'];
+
 
 
   userForm = new FormGroup({
