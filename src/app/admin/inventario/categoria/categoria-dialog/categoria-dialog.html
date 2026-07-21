@@ -1,0 +1,34 @@
+<h2 mat-dialog-title class="dialog-title">Categoría</h2>
+
+<mat-dialog-content class="dialog-content">
+  <p class="dialog-description">Ingrese los datos correspondientes a la categoría.</p>
+
+  <form class="category-form">
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Nombre</mat-label>
+      <input matInput [(ngModel)]="data.nombre" name="nombre" placeholder="Ej. Electrónica" required />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Descripción</mat-label>
+      <textarea 
+        matInput 
+        [(ngModel)]="data.descripcion" 
+        name="descripcion" 
+        rows="3" 
+        placeholder="Breve descripción de la categoría">
+      </textarea>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end" class="dialog-actions">
+  <button mat-button (click)="onNoClick()">Cancelar</button>
+  <button 
+    mat-flat-button 
+    color="primary" 
+    [mat-dialog-close]="dataCategoria()" 
+    cdkFocusInitial>
+    Guardar
+  </button>
+</mat-dialog-actions>

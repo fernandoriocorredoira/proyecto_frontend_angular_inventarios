@@ -23,7 +23,6 @@ export interface PeriodicElement {
   imports: [
     ReactiveFormsModule,
     MatTableModule,
-    MatTableModule,
     MatIconModule,
     MatCardModule,
     MatButtonModule,

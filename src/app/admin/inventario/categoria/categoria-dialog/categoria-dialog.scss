@@ -1,0 +1,44 @@
+/* Título principal del Modal */
+.dialog-title {
+  margin: 0;
+  padding-bottom: 8px;
+  font-size: 1.35rem;
+  font-weight: 600;
+}
+
+/* Descripción secundaria */
+.dialog-description {
+  color: #666;
+  font-size: 0.9rem;
+  margin-bottom: 20px;
+}
+
+/* Contenido del Modal y Formulario */
+.dialog-content {
+  min-width: 320px;
+  max-width: 480px;
+  padding-top: 8px !important; /* Compensa el padding superior por defecto de Angular Material */
+}
+
+.category-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+/* Botones de acción inferior */
+.dialog-actions {
+  padding: 16px 24px !important;
+  gap: 8px;
+  border-top: 1px solid #f0f0f0;
+}
+
+.dialog-actions button {
+  border-radius: 8px;
+  text-transform: none;
+  font-weight: 500;
+}

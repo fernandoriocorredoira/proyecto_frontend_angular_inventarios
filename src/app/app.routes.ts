@@ -9,6 +9,7 @@ import { Perfil } from './admin/perfil/perfil';
 import { Users } from './admin/users/users';
 import { NavigationComponent } from './layout/navigation/navigation.component';
 import { DashComponent } from './admin/dash/dash.component';
+import { Categoria } from './admin/inventario/categoria/categoria';
 
 export const routes: Routes = [
     {
@@ -28,6 +29,10 @@ export const routes: Routes = [
             { path: '', component: DashComponent },
             { path: 'perfil', component: Perfil },
             { path: 'usuarios', component: Users },
+            {
+                path: 'categoria',
+                component: Categoria
+            }
         ]
     },
 ];

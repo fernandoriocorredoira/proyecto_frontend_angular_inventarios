@@ -1,1 +1,66 @@
-<p>categoria works!</p>
+<h1>Gestión Categorias</h1>
+<button matButton="elevated" (click)="abrirDialog()">Nueva Categoria</button>
+
+
+<table mat-table [dataSource]="categorias()" class="mat-shadow-2">
+
+  <!--- Note that these columns can be defined in any order.
+        The actual rendered columns are set as a property on the row definition" -->
+
+  <!-- id Column -->
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef> Id. </th>
+    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="nombre">
+    <th mat-header-cell *matHeaderCellDef> nombre </th>
+    <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
+  </ng-container>
+
+  <!-- Weight Column -->
+  <ng-container matColumnDef="descripcion">
+    <th mat-header-cell *matHeaderCellDef> Descripción </th>
+    <td mat-cell *matCellDef="let element"> {{element.descripcion }} </td>
+  </ng-container>
+
+  <!-- Acciones Column -->
+        <ng-container matColumnDef="accion">
+          <mat-header-cell *matHeaderCellDef class="action-header">Acciones</mat-header-cell>
+          <mat-cell *matCellDef="let cat" class="action-cell">
+            <button mat-icon-button color="primary" matTooltip="Editar usuario" (click)="abrirDialogEditar(cat)">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button color="warn" matTooltip="Eliminar usuario">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </mat-cell>
+        </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+<table border="1">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>NOMBRE</th>
+            <th>DESCRIPCIÓN</th>
+            <th>ACCION</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (item of categorias(); track $index) {
+            <tr>
+                <td>{{ item.id }}</td>
+                <td>{{ item.nombre }}</td>
+                <td>{{ item.descripcion }}</td>
+                <td></td>
+            </tr>
+
+        }
+    </tbody>
+
+</table>
