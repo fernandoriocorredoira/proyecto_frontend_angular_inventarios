@@ -12,6 +12,9 @@ import { DashComponent } from './admin/dash/dash.component';
 import { Categoria } from './admin/inventario/categoria/categoria';
 import { Sucursal } from './admin/inventario/sucursal/sucursal';
 import { Almacen } from './admin/inventario/almacen/almacen';
+import { Producto } from './admin/inventario/producto/producto';
+import { ListaProducto } from './admin/inventario/producto/lista-producto/lista-producto';
+import { NuevoProducto } from './admin/inventario/producto/nuevo-producto/nuevo-producto';
 
 export const routes: Routes = [
     {
@@ -42,6 +45,14 @@ export const routes: Routes = [
             {
                 path: 'almacen',
                 component: Almacen
+            },
+            {
+                path: 'producto',
+                component: Producto,
+                children: [
+                    { path: '', component: ListaProducto },
+                    { path: 'nuevo', component: NuevoProducto }
+                ]
             }
         ]
     },

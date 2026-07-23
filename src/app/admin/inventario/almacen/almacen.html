@@ -1,1 +1,176 @@
-<p>almacen works!</p>
+<div class="container">
+  
+  <!-- Encabezado y Filtro -->
+  <mat-card class="card-filter">
+    <mat-card-header>
+      <mat-card-title>Gestión de Almacenes</mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="filter-content">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Filtrar por Sucursal</mat-label>
+        <mat-select [(ngModel)]="sucursal_id" (selectionChange)="funListarAlmacenes()">
+          <mat-option [value]="-1">-- Todas las Sucursales --</mat-option>
+          @for (item of sucursales(); track item.id) {
+            <mat-option [value]="item.id">{{ item.nombre }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Formulario de Registro / Edición -->
+  <mat-card class="card-form">
+    <mat-card-header>
+      <mat-card-title>{{ formAlmacen.id ? 'Editar Almacén' : 'Nuevo Almacén' }}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="form-grid">
+
+      <mat-form-field appearance="outline">
+        <mat-label>Nombre</mat-label>
+        <input matInput [(ngModel)]="formAlmacen.nombre" placeholder="Ej. Almacén Central" required>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Código</mat-label>
+        <input matInput [(ngModel)]="formAlmacen.codigo" placeholder="Ej. ALM-001">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Sucursal</mat-label>
+        <mat-select [(ngModel)]="formAlmacen.sucursalId" required>
+          <mat-option [value]="-1" disabled>Seleccione una sucursal</mat-option>
+          @for (item of sucursales(); track item.id) {
+            <mat-option [value]="item.id">{{ item.nombre }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="col-span-full">
+        <mat-label>Descripción</mat-label>
+        <textarea matInput [(ngModel)]="formAlmacen.descripcion" rows="2" placeholder="Breve descripción..."></textarea>
+      </mat-form-field>
+
+    </mat-card-content>
+    <mat-card-actions align="end">
+      @if (formAlmacen.id) {
+        <button mat-button color="warn" (click)="funLimpiarFormulario()">Cancelar</button>
+      }
+      <button mat-raised-button color="primary" (click)="funGuardarAlmacen()">
+        <mat-icon>save</mat-icon>
+        {{ formAlmacen.id ? 'Actualizar' : 'Guardar' }}
+      </button>
+    </mat-card-actions>
+  </mat-card>
+
+  <!-- Tabla Angular Material -->
+  <mat-card class="card-table">
+    <mat-card-content>
+      <table mat-table [dataSource]="almacenes()" class="mat-elevation-z1 full-width">
+
+        <!-- ID Column -->
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef> ID </th>
+          <td mat-cell *matCellDef="let element"> {{ element.id }} </td>
+        </ng-container>
+
+        <!-- Nombre Column -->
+        <ng-container matColumnDef="nombre">
+          <th mat-header-cell *matHeaderCellDef> NOMBRE </th>
+          <td mat-cell *matCellDef="let element"> {{ element.nombre }} </td>
+        </ng-container>
+
+        <!-- Código Column -->
+        <ng-container matColumnDef="codigo">
+          <th mat-header-cell *matHeaderCellDef> CÓDIGO </th>
+          <td mat-cell *matCellDef="let element"> {{ element.codigo || '-' }} </td>
+        </ng-container>
+
+        <!-- Descripción Column -->
+        <ng-container matColumnDef="descripcion">
+          <th mat-header-cell *matHeaderCellDef> DESCRIPCIÓN </th>
+          <td mat-cell *matCellDef="let element"> {{ element.descripcion || '-' }} </td>
+        </ng-container>
+
+        <!-- Acciones Column -->
+        <ng-container matColumnDef="acciones">
+          <th mat-header-cell *matHeaderCellDef class="text-center"> ACCIONES </th>
+          <td mat-cell *matCellDef="let element" class="text-center">
+            <button mat-icon-button color="primary" (click)="funEditarAlmacen(element)" matTooltip="Editar">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button color="warn" (click)="funEliminarAlmacen(element.id)" matTooltip="Eliminar">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+        <!-- Fila vacía -->
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell empty-table" [attr.colspan]="displayedColumns.length">
+            No hay almacenes registrados.
+          </td>
+        </tr>
+      </table>
+    </mat-card-content>
+  </mat-card>
+
+</div>
+
+<!--
+<h1>Lista almacenes</h1>
+{{ almacenes() }}
+
+<select [(ngModel)]="sucursal_id" (change)="funListarAlmacenes()">
+    @for (item of sucursales(); track $index) {
+        <option [value]="item.id" >{{item.nombre}}</option>
+    }
+</select>
+
+<br>
+<div >
+
+    <label for="">Ingrese Nombre</label>
+    <input type="text" [(ngModel)]="almacen().nombre">
+    <br>
+    <label for="">Ingrese CODIGO</label>
+    <input type="text" [(ngModel)]="almacen().codigo">
+    <br>
+    <label for="">Ingrese descripción</label>
+    <input type="text" [(ngModel)]="almacen().descripcion">
+    <br>
+    <label for="">Ingrese Sucursal</label>
+    <select [(ngModel)]="almacen().sucursalId" (change)="funListarAlmacenes()">
+        @for (item of sucursales(); track $index) {
+            <option [value]="item.id" >{{item.nombre}}</option>
+        }
+    </select>
+    <br>
+    <button type="button" (click)="funGuardarAlmacen()">Guardar</button>
+</div>
+
+
+<table border="1">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>NOMBRE</th>
+            <th>CODIGO</th>
+            <th>DESCRIPCIÓN</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (alm of almacenes(); track $index) {
+            <tr>
+                <td>{{ alm.id }}</td>
+                <td>{{ alm.nombre }}</td>
+                <td>{{ alm.codigo }}</td>
+                <td>{{ alm.descripcion }}</td>
+            </tr>
+
+        }
+    </tbody>
+</table>
+-->

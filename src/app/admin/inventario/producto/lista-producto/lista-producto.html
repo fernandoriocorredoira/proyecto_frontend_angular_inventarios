@@ -1,0 +1,29 @@
+<h1>Lista Productos</h1>
+
+{{lista_productos()}}
+
+<table border="1">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>NOMBRE</th>
+            <th>precio_venta_actual</th>
+            <th>imagen</th>
+            <th>Acción</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (prod of lista_productos(); track $index) {
+            <tr>
+                <td>{{ prod.id }}</td>
+                <td>{{ prod.nombre }}</td>
+                <td>{{ prod.precio_venta_actual }}</td>
+                <td>
+                    <img [src]="`http://127.0.0.1:5000/${prod.imagen}`" alt="">
+                </td>
+                <td></td>
+            </tr>
+
+        }
+    </tbody>
+</table>

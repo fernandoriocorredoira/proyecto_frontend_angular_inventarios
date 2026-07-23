@@ -1,0 +1,41 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.card-filter, .card-form, .card-table {
+  border-radius: 8px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+
+  .col-span-full {
+    grid-column: 1 / -1;
+  }
+}
+
+.text-center {
+  text-align: center;
+}
+
+.empty-table {
+  padding: 2rem;
+  text-align: center;
+  color: #777;
+}
+
+table {
+  width: 100%;
+}

@@ -3,5 +3,5 @@ export interface AlmacenInterface{
     nombre: string;
     codigo?: string;
     descripcion?:string;
-    sucursalId: string;
+    sucursalId: number;
 }
