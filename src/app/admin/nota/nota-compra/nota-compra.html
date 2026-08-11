@@ -117,6 +117,26 @@
                 </mat-card-title>
             </mat-card-header>
             <mat-card-content>
+
+                    <mat-form-field appearance="outline" class="full-width">
+                        <mat-label>Filtrar por Sucursal</mat-label>
+                        <mat-select [(ngModel)]="sucursal_id" (selectionChange)="funListarAlmacenes()">
+                        <mat-option [value]="-1">-- Todas las Sucursales --</mat-option>
+                        @for (item of sucursales(); track item.id) {
+                            <mat-option [value]="item.id">{{ item.nombre }}</mat-option>
+                        }
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" class="full-width">
+                        <mat-label>Filtrar por Almacen</mat-label>
+                        <mat-select [(ngModel)]="almacen_id" (selectionChange)="funListaProductos()">
+                        <mat-option [value]="-1">-- Todas los almacenes --</mat-option>
+                        @for (item of almacenes(); track item.id) {
+                            <mat-option [value]="item.id">{{ item.nombre }}</mat-option>
+                        }
+                        </mat-select>
+                    </mat-form-field>
+                
                
             </mat-card-content>
 
@@ -129,6 +149,30 @@
                 </mat-card-title>
             </mat-card-header>
             <mat-card-content>
+                {{proveedorSelected().id}}
+                @if (!proveedorSelected().id) {
+                    <div class="proveedores">
+                        @for (proveedor of proveedores(); track proveedor.id) {
+                            <div class="">
+                                <div>
+                                    <strong>{{ proveedor.tipo }}</strong>
+                                </div>
+                            </div>
+                            <div>
+                                {{proveedor.razon_social}}
+                            </div>
+                            <div>
+                                {{ proveedor.nro_identificacion }}
+                            </div>
+
+                            <button mat-icon-button color="primary" (click)="seleccionarProveedor(proveedor)">
+                                <mat-icon>check_circle</mat-icon>
+                            </button>
+                        }
+
+                    </div>
+                }
+
                
             </mat-card-content>
 
@@ -136,7 +180,7 @@
 
          <mat-card appearance="outlined">
             <mat-card-content>
-               <button mat-flat-button color="primary">Registrar Compra</button>
+               <button mat-flat-button color="primary" (click)="generarCompra()">Registrar Compra</button>
             </mat-card-content>
 
         </mat-card>
